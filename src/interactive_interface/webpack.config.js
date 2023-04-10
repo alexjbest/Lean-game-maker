@@ -29,11 +29,11 @@ module.exports = {
         rules: [
             {
                 test: /webworkerscript\.js$/,
-                use: { loader:'worker-loader' },
+                //loader:'worker-loader',
             },
             {
                 test: /\.tsx?$/,
-                loader: [
+                loader: 
     // To use babel in lean-client-js-browser, add the following to this package.json
     // "babel-core": "^6.26.3",
     // "babel-loader": "^7.1.2",
@@ -41,7 +41,7 @@ module.exports = {
     // "babel-preset-env": "^1.7.0",
                     // 'babel-loader?presets[]=env',
                     'ts-loader'
-                ],
+                ,
             },
         ],
     },
@@ -53,19 +53,31 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: 'public/index.html'
         }),
-        new CopyWebpackPlugin([
-            { from: VSMonacoEditorSrc, to: 'vs', },
-            { from: 'public/interactive.css', to: 'interactive.css', },
-            { from: 'public/lean_logo.svg', to: 'lean_logo.svg', },
-            { from: 'public/display-goal-light.svg', to: 'display-goal-light.svg', },
-            { from: 'public/display-list-light.svg', to: 'display-list-light.svg', },
-        ]),
+        new CopyWebpackPlugin(
+            { 
+                patterns: [
+                    { from: VSMonacoEditorSrc, to: 'vs', },
+                    { from: 'public/interactive.css', to: 'interactive.css', },
+                    { from: 'public/lean_logo.svg', to: 'lean_logo.svg', },
+                    { from: 'public/display-goal-light.svg', to: 'display-goal-light.svg', },
+                    { from: 'public/display-list-light.svg', to: 'display-list-light.svg', },
+                ]}),
         new TerserPlugin(),
     ],
-    node: {
-        child_process: 'empty',
-        readline: 'empty',
+    resolve: {
+        extensions: [ '.ts', '.tsx', '.js' ],
+        fallback: {
+
+      dgram: false,
+      fs: false,
+      path: false,
+      net: false,
+      tls: false,
+      child_process: false
+            /// ....
+        }
     },
+
     externals: {
         // react: 'require("react")',
         // 'react-dom': 'require("react-dom")',
