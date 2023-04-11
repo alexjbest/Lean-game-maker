@@ -27,10 +27,10 @@ module.exports = {
     },
     module: {
         rules: [
-            {
-                test: /webworkerscript\.js$/,
+            //{
+            //    test: /webworkerscript\.js$/,
                 //loader:'worker-loader',
-            },
+            //},
             {
                 test: /\.tsx?$/,
                 loader: 
